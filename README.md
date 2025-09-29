@@ -1,7 +1,6 @@
 # agri-sense
 Data-driven web app for monitoring and optimizing plant (vertical/indoor farm) health.
 
-#Set-up
 Frontend:
 Clone the repo, run npm install (using your package.json), and then run npm start to launch the React development server.
 
