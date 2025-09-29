@@ -2,8 +2,8 @@
 Data-driven web app for monitoring and optimizing plant (vertical/indoor farm) health.
 
 Frontend:
-Clone the repo, Navigate to the directory: cd frontend
-Install dependencies (if needed): npm install 
+Clone the repo, Navigate to the directory: cd frontend.
+Install dependencies (if needed): npm install.
 Start the server: npm start run npm install (using your package.json),
 Run: npm start to launch the React development server.
 
