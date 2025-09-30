@@ -4,8 +4,7 @@ Data-driven web app for monitoring and optimizing plant (vertical/indoor farm) h
 Frontend:
 Clone the repo, Navigate to the directory: cd frontend.  
 Install dependencies (if needed): npm install.  
-Start the server: npm start run npm install (using your package.json),  
-Run: npm start to launch the React development server  
+Start the server, Run: npm start to launch the React development server (using your package.json)  
 
 
 Backend:
