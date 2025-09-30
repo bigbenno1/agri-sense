@@ -7,8 +7,8 @@ Install dependencies (if needed): npm install.
 Start the server, Run: npm start to launch the React development server (using your package.json)  
 
 
-Backend:
-Clone the repo, 
+Backend:  
+Clone the repo,  
 #1. python3 -m venv venv #Creates a dedicated, isolated Python environment.  
 #2. source venv/bin/activate #Activates the new environment.  
 #3. pip install -r requirements.txt #install Python and dependencies  
