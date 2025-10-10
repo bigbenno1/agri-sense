@@ -12,4 +12,4 @@
 *.py                    @ScottJGilbert
 
 # Any files not matching the above (e.g., Readme, top-level project files)
-/                       @bigbenno1
+*                       @bigbenno1
