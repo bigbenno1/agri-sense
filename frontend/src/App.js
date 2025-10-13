@@ -52,9 +52,9 @@ function App() {
         </div>
       )}
 
-      <p style={{ marginTop: '40px', color: '#065c81ff' }}>
+      <p style={{ marginTop: '40px', color: '#888' }}>
         *Frontend development starts here. Current view confirms successful API connection.*
-        Testing... 
+       
       </p>
     </div>
   );
