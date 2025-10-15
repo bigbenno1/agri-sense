@@ -14,3 +14,8 @@ Clone the repo,
 #3. `pip install -r requirements.txt` install Python and dependencies  
 #4. run `python backend/app.py`.  
 #5. Navigate to http://localhost:5000/api/status in the browser. If the confirmation JSON is visible, the environment is correctly configured.
+#1. python3 -m venv venv (or python -m venv venv depending on your system) #Creates a dedicated, isolated Python environment.  
+#2. source venv/bin/activate #Activates the new environment.  
+#3. pip install -r requirements.txt #install Python and dependencies  
+#4. run python backend/run.py.  
+#5. Navigate to http://localhost:5000/api/status in the browser. If the confirmation JSON is visible, the environment is correctly configured.  

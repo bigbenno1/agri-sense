@@ -1,5 +1,9 @@
 from flask import Flask
 from flask_cors import CORS
+from dotenv import load_dotenv
+
+# Load environment variables from a .env file if present
+load_dotenv()
 
 def create_app():
     """Application factory function."""
