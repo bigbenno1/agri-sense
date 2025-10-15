@@ -54,8 +54,7 @@ function App() {
 
       <p style={{ marginTop: '40px', color: '#888' }}>
         *Frontend development starts here. Current view confirms successful API connection.*
-        testing testing 1,2,3
-        practice demo
+       
       </p>
     </div>
   );
