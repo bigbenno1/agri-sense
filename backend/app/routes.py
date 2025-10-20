@@ -1,4 +1,6 @@
 from flask import Blueprint, jsonify
+import random
+from app.models import SensorData
 
 api = Blueprint("api", __name__)
 
@@ -22,3 +24,17 @@ def get_recommendation():
     # recommendation = get_recommendation_data()
     recommendation = { "message": "Move your plant into the shade" }
     return jsonify(recommendation)
+
+@api.route("/data", methods=["GET"])
+def get_sensor_data():
+    """Generate randomized plant sensor data and send it to the frontend."""
+    data = SensorData(name="PLANT")
+
+    # randomized but bounded values
+    data.set_air_temp(value=round(random.uniform(60, 80), 1), max_val=80, min_val=60)
+    data.set_water_temp(value=round(random.uniform(60, 72), 1), max_val=72, min_val=60)
+    data.set_humidity(value=round(random.uniform(0.4, 0.6), 2), max_val=0.6, min_val=0.4)
+    data.set_electrical_conductivity(value=round(random.uniform(0.8, 2.2), 1), max_val=2.2, min_val=0.8)
+    data.set_pH(value=round(random.uniform(5.5, 7.0), 2), max_val=7.0, min_val=5.5)
+
+    return jsonify(data.create_dict()), 200
