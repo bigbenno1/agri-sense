@@ -2,12 +2,12 @@
 
 Data-driven web app for monitoring and optimizing plant (vertical/indoor farm) health.
 
-Frontend:
-Clone the repo, Navigate to the directory: cd frontend.  
-Install dependencies (if needed): npm install.  
-Start the server, Run: npm start to launch the React development server (using your package.json)
+## Frontend:
+Clone the repo, Navigate to the directory: `cd frontend`.  
+Install dependencies (if needed): `npm install`.  
+Start the server, Run: `npm start` to launch the React development server (using your package.json)  
 
-Backend:  
+## Backend:  
 Clone the repo,  
 #1. `python3 -m venv venv` OR `python -m venv venv` Creates a dedicated, isolated Python environment.  
 #2. `source venv/bin/activate` on Mac/Linux OR `venv/Scripts/Activate.ps1` on Windows Activates the new environment.  
