@@ -1,9 +1,3 @@
-/*********
-  Rui Santos
-  Complete project details at http://randomnerdtutorials.com  
-  Based on the Dallas Temperature Library example
-*********/
-
 #include <OneWire.h>
 #include <DallasTemperature.h>
 
@@ -34,7 +28,10 @@ void loop(void){
 
 // Example function to read temperature
 void temperature(void) {
+  // Request temperature readings from the sensor and convert to farenheit
   sensors.requestTemperatures(); 
   float farenheitTemp = sensors.getTempFByIndex(0);
+
+  // Print the temperature in farenheit to the Serial Monitor
   Serial.println(farenheitTemp);
 }
