@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import DashboardLayout from './layouts/dashboard-layout';
 import DashboardPage from './pages/dashboard';
 import PlantPage from './pages/plant-details';
+import Header from './components/header';
 
 // You will need to install Tailwind CSS for styling in the next steps, 
 // but for now, we'll use inline styles to keep it minimal.
