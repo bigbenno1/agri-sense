@@ -46,6 +46,7 @@ function App() {
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', padding: 0, textAlign: 'center', margin: 0}}>
       <Header/>
+      <PlantPage />
       <div style={{paddingTop:"8vh"}}>
         <h1>🌱 Agri-Sense Dashboard (MVP) 🌱</h1>
         <p style={{ fontSize: '1.2em', color: data.status === "Online" ? 'green' : 'red', fontWeight: 'bold' }}>
