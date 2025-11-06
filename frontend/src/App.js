@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 //import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import DashboardLayout from './layouts/dashboard-layout';
+//import DashboardLayout from './layouts/dashboard-layout';
 import DashboardPage from './pages/dashboard';
 import PlantPage from './pages/plant-details';
 import Header from './components/header';
+import useFetch from './hooks/useFetch';
 
 // You will need to install Tailwind CSS for styling in the next steps, 
 // but for now, we'll use inline styles to keep it minimal.
@@ -12,7 +13,7 @@ function App() {
   // State to hold data fetched from the Flask backend
   const [apiStatus, setApiStatus] = useState("Connecting...");
   const [data, setData] = useState({});
-
+  
   // useEffect hook runs when the component mounts
   useEffect(() => {
     // Function to fetch data from the Flask server
@@ -41,11 +42,27 @@ function App() {
     // Clean up the interval when the component unmounts
     return () => clearInterval(interval);
   }, []); // Empty dependency array ensures this runs only once on mount
+  
+  //using API
+  /*
+  const plantName = 'basil'; // example plant name
+  // fetch data
+  const { data: sensorData, loading: loadingData, error: errorData } =
+    useFetch(`/api/data?name=${plantName}`);
 
+  // fetch recommendation
+  const { data: recommendation, loading: loadingRec, error: errorRec } =
+    useFetch(`/api/recommendation?name=${plantName}`);
+
+  if (loadingData || loadingRec) return <p>Loading...</p>;
+  if (errorData || errorRec) return <p>Error: {errorData || errorRec}</p>;
+  */
+  
 
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', padding: 0, textAlign: 'center', margin: 0}}>
       <Header/>
+      <DashboardPage/>
       <PlantPage />
       <div style={{paddingTop:"8vh"}}>
         <h1>🌱 Agri-Sense Dashboard (MVP) 🌱</h1>
@@ -65,7 +82,23 @@ function App() {
         *Frontend development starts here. Current view confirms successful API connection.*
        
       </p>
+      
+      {/* display API data */}
+      {/* <h1>{plantName} Sensor Data</h1>
+      {sensorData && (
+        <ul>
+          <li>Air Temp: {sensorData.air_temp}°C</li>
+          <li>Water Temp: {sensorData.water_temp}°C</li>
+          <li>Humidity: {sensorData.humidity}%</li>
+          <li>EC: {sensorData.electrical_conductivity}</li>
+          <li>pH: {sensorData.pH}</li>
+        </ul>
+      )}
+
+      <h2>Recommendation</h2>
+      {recommendation && <p>{recommendation.message}</p>} */}
     </div>
+
   );
 }
 
