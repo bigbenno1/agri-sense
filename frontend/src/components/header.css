@@ -9,6 +9,9 @@
     align-items: center;
     justify-content: space-between;
     position: fixed;
+    top: 0;          /* Add this */
+    left: 0;         /* Add this */
+    z-index: 1000;   /* Add this to keep it on top */
 }
 
 .material-icons.menu-button {

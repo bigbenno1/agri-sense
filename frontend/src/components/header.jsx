@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import "./header.css"
 
 export default function Header() {
@@ -11,22 +12,21 @@ export default function Header() {
 
         <header className="header-box">
             {/* Menu button */}
-            <a href="">
+            <button style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
                 <i className="menu-button material-icons">menu</i>
-            </a>
+            </button>
 
             {/* Title */}
-            <a className="title"
-                href="">
+            <Link className="title" to="/" style={{ textDecoration: 'none' }}>
                 <h1>🌱Agri-Sense🌱</h1>
-            </a>
+            </Link>
             
             {/* Profile Icon */}
-            <a href="">
-                <i class="material-icons profile-button">
+            <button style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+                <i className="material-icons profile-button">
                     account_circle
                 </i>
-            </a>
+            </button>
         </header>
         </>
     )

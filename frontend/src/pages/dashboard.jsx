@@ -1,23 +1,20 @@
 import React from 'react';
-//import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Card from '../components/card';
-import Button from '../components/button';
 
 const DashboardPage = () => {
     return (
         <main className="dashboard-page"
             style={{ 
             padding: '2rem',
-            paddingTop: '10vh',
             minHeight: '100vh',
             backgroundColor: '#f5f9f7'
-        }} >
+        }}>
             {/* Dashboard header */}
             <div style={{
                 textAlign: 'center',
                 marginBottom: '2rem'
             }}>
-                
                 <h1 style={{ 
                     color: '#2f5b4a',
                     margin: '0.5rem 0'
@@ -28,9 +25,10 @@ const DashboardPage = () => {
                     color: '#6b8a78',
                     fontSize: '0.9rem'
                 }}>
-                    click for more info
+                    Click on a plant for more info
                 </p>
             </div>
+            
             <div className="cards" 
                 style={{
                 display: 'grid',
@@ -40,21 +38,17 @@ const DashboardPage = () => {
                 margin: '0 auto',
                 padding: '0 1rem'
             }}>
-                <Card title="Plant 1"/>
-                <Card title="Plant 2"/>
-                <Card title="Plant 3"/>
-                {/* <Link to="/plant/1">
+                <Link to="/plant/1" style={{ textDecoration: 'none' }}>
                     <Card title="Plant 1"/>
                 </Link>
-                <Link to="/plant/2">
+                <Link to="/plant/2" style={{ textDecoration: 'none' }}>
                     <Card title="Plant 2"/>
                 </Link>
-                <Link to="/plant/3">
+                <Link to="/plant/3" style={{ textDecoration: 'none' }}>
                     <Card title="Plant 3"/>
-                </Link> */}
+                </Link>
             </div>
         </main>
-
     );
 };
 
