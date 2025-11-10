@@ -61,11 +61,11 @@ function App() {
 
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', padding: 0, textAlign: 'center', margin: 0}}>
-      <Header/>
       {/* <DashboardPage/>
       <PlantPage /> */}
 
       <Router>
+        <Header/>
         <Routes>
           <Route path="/" element={<DashboardPage />} />
           <Route path="/plant/:id" element={<PlantPage />} /> 
