@@ -41,7 +41,7 @@ export default function Header() {
             {/* Title */}
             <Link className="title" to="/" style={{ textDecoration: 'none' }}>
                 <h1>🌱Agri-Sense🌱</h1>
-            </a>
+            </Link>
 
             {/* Profile Icon */}
             <button style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
