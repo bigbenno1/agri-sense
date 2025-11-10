@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-//import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
 //import DashboardLayout from './layouts/dashboard-layout';
 import DashboardPage from './pages/dashboard';
 import PlantPage from './pages/plant-details';
@@ -62,8 +62,16 @@ function App() {
   return (
     <div style={{ fontFamily: 'Arial, sans-serif', padding: 0, textAlign: 'center', margin: 0}}>
       <Header/>
-      <DashboardPage/>
-      <PlantPage />
+      {/* <DashboardPage/>
+      <PlantPage /> */}
+
+      <Router>
+        <Routes>
+          <Route path="/" element={<DashboardPage />} />
+          <Route path="/plant/:id" element={<PlantPage />} /> 
+        </Routes>
+
+      </Router>
       <div style={{paddingTop:"8vh"}}>
         <h1>🌱 Agri-Sense Dashboard (MVP) 🌱</h1>
         <p style={{ fontSize: '1.2em', color: data.status === "Online" ? 'green' : 'red', fontWeight: 'bold' }}>

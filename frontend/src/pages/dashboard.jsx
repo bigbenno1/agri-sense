@@ -1,9 +1,14 @@
 import React from 'react';
-//import { Link } from 'react-router-dom';
-import Card from '../components/card';
+import { Link } from 'react-router-dom';
+//import Card from '../components/card';
 import Button from '../components/button';
 
 const DashboardPage = () => {
+    const plants = [
+                { id: 1, name: "Basil Plant 1"}, 
+                { id: 2, name: "Basil Plant 2"},
+                { id: 3, name: "Basil Plant 3"}
+            ];
     return (
         <main className="dashboard-page"
             style={{ 
@@ -40,18 +45,11 @@ const DashboardPage = () => {
                 margin: '0 auto',
                 padding: '0 1rem'
             }}>
-                <Card title="Plant 1"/>
-                <Card title="Plant 2"/>
-                <Card title="Plant 3"/>
-                {/* <Link to="/plant/1">
-                    <Card title="Plant 1"/>
-                </Link>
-                <Link to="/plant/2">
-                    <Card title="Plant 2"/>
-                </Link>
-                <Link to="/plant/3">
-                    <Card title="Plant 3"/>
-                </Link> */}
+                {plants.map((plant) => (
+                    <Link key={plant.id} to={`/plant/${plant.id}`}>
+                        <Button>{plant.name}</Button>
+                    </Link>
+                ))}
             </div>
         </main>
 

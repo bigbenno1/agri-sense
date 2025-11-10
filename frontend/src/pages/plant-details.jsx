@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import Card from '../components/card';
 
 const PlantPage = () => {
+    const {id} = useParams();
     const [plantData, setPlantData] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -15,7 +17,7 @@ const PlantPage = () => {
                 
                 // Mock data for now - replace with actual API call
                 const mockData = {
-                    id: 1,
+                    id: id,
                     name: "Basil Plant #1",
                     lastUpdated: new Date().toISOString(),
                     sensors: {
