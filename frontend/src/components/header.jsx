@@ -1,26 +1,48 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import "./header.css"
+import Sidebar from './sidebar';
 
 export default function Header() {
-    return (
-        <>
-        {/* Font/icon links */}
-        <link href="https://fonts.googleapis.com/css?family=Offside" rel="stylesheet"></link>
-        <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet"></link>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>
+  // Single click handler that toggles a class on <html> and updates padding
+  const toggleSidebar = () => {
+    // 1) Flip a flag class on <html> (drives all sidebar CSS)
+    const root = document.documentElement;                           // get the <html> element
+    const willClose = !root.classList.contains('agri-sidebar-closed'); // figure out next state
+    root.classList.toggle('agri-sidebar-closed', willClose);           // apply/remove the class
 
+    // 2) Persist the state so refresh keeps your preference
+    try { localStorage.setItem('sidebar:closed', String(willClose)); } catch {}
+
+    // 3) Nudge the page content by the actual sidebar width
+    const el = document.getElementById('sidebar');                   // find the sidebar element
+    const w  = el ? el.getBoundingClientRect().width : (willClose ? 55 : 250); // read width or fall back
+    document.body.style.paddingLeft = `${w}px`;                      // push main content over
+  };
+
+  return (
+    <>
+      {/* Mount the sidebar once so it can react to the <html> class */}
+        <Sidebar />
         <header className="header-box">
+            {/* Font/icon links */}
+            <link href="https://fonts.googleapis.com/css?family=Offside" rel="stylesheet"></link>
+            <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet"></link>
+            <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"></link>
+
             {/* Menu button */}
-            <button style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
-                <i className="menu-button material-icons">menu</i>
+            <button onClick={toggleSidebar} className="menu-toggle-button" aria-label="Toggle sidebar">
+            <i className="menu-button material-icons">menu</i>
             </button>
+            {/* <a href="" onClick={toggleSidebar} aria-label="Toggle sidebar">
+                    <i className="menu-button material-icons">menu</i>
+                </a> */}
 
             {/* Title */}
             <Link className="title" to="/" style={{ textDecoration: 'none' }}>
                 <h1>🌱Agri-Sense🌱</h1>
-            </Link>
-            
+            </a>
+
             {/* Profile Icon */}
             <button style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
                 <i className="material-icons profile-button">
@@ -28,6 +50,6 @@ export default function Header() {
                 </i>
             </button>
         </header>
-        </>
-    )
+    </>
+  )
 }

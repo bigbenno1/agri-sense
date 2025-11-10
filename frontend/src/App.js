@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {BrowserRouter as Router, Routes, Route, Link} from 'react-router-dom';
+//import DashboardLayout from './layouts/dashboard-layout';
 import DashboardPage from './pages/dashboard';
 import PlantPage from './pages/plant-details';
 import Header from './components/header';
@@ -27,36 +28,29 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <div style={{ fontFamily: 'Arial, sans-serif', padding: 0, margin: 0 }}>
-        <Header/>
-        
-        {/* Show connection status banner if offline */}
-        {data.status !== "Online" && (
-          <div style={{
-            position: 'fixed',
-            top: '8vh',  // Right below the header
-            left: 0,
-            right: 0,
-            backgroundColor: '#f8d7da',
-            color: '#721c24',
-            padding: '0.75rem',
-            textAlign: 'center',
-            zIndex: 999,  // Below header (1000) but above content
-            boxShadow: '0 2px 4px rgba(0,0,0,0.1)',
-            borderBottom: '2px solid #f5c6cb'
-          }}>
-            ⚠️ Backend Status: {apiStatus}
-          </div>
-        )}
-        {/* Add padding to content when banner is showing */}
-        <div style={{ 
-          paddingTop: data.status !== "Online" ? 'calc(8vh + 3rem)' : '8vh' 
-        }}>
-          <Routes>
-            <Route path="/" element={<DashboardPage />} />
-            <Route path="/plant/:id" element={<PlantPage />} />
-          </Routes>
+    <div style={{ fontFamily: 'Arial, sans-serif', padding: 0, textAlign: 'center', margin: 0}}>
+      <Header/>
+      {/* <DashboardPage/>
+      <PlantPage /> */}
+
+      <Router>
+        <Routes>
+          <Route path="/" element={<DashboardPage />} />
+          <Route path="/plant/:id" element={<PlantPage />} /> 
+        </Routes>
+
+      </Router>
+      <div style={{paddingTop:"8vh"}}>
+        <h1>🌱 Agri-Sense Dashboard (MVP) 🌱</h1>
+        <p style={{ fontSize: '1.2em', color: data.status === "Online" ? 'green' : 'red', fontWeight: 'bold' }}>
+          Backend Status: {apiStatus}
+        </p>
+      </div>
+      {data.status === "Online" && (
+        <div style={{ marginTop: '20px', border: '1px solid #ccc', padding: '15px', borderRadius: '8px', maxWidth: '400px', margin: '20px auto' }}>
+          <h3>API Information</h3>
+          <p>Message: {data.message}</p>
+          <p>Version: {data.version}</p>
         </div>
       </div>
     </Router>
