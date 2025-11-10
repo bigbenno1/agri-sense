@@ -1,36 +1,39 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import Card from '../components/card';
 
 const PlantPage = () => {
-    const {id} = useParams();
+    const { id } = useParams(); // Get plant ID from URL
     const [plantData, setPlantData] = useState(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        // Fetch plant data from your backend
         const fetchPlantData = async () => {
             try {
-                // Replace with your actual API endpoint
-                // const response = await fetch('http://localhost:5000/api/plant/1');
-                // const data = await response.json();
+                // Fetch sensor data from Flask backend
+                const dataResponse = await fetch('http://localhost:5000/api/data');
+                const sensorData = await dataResponse.json();
                 
-                // Mock data for now - replace with actual API call
-                const mockData = {
+                // Fetch recommendations
+                const recResponse = await fetch('http://localhost:5000/api/recommendation');
+                const recommendations = await recResponse.json();
+                
+                // Format data for display
+                const formattedData = {
                     id: id,
-                    name: "Basil Plant #1",
+                    name: `${sensorData.name || "Plant"} #${id}`,
                     lastUpdated: new Date().toISOString(),
                     sensors: {
-                        airTemp: { value: 72, unit: "°F", status: "optimal" },
-                        humidity: { value: 65, unit: "%", status: "optimal" },
-                        waterTemp: { value: 68, unit: "°F", status: "optimal" },
-                        lightIntensity: { value: 450, unit: "PPFD", status: "optimal" },
-                        ec: { value: 1.8, unit: "mS/cm", status: "optimal" },
-                        ph: { value: 6.2, unit: "", status: "optimal" }
-                    }
+                        airTemp: sensorData.air_temp,
+                        humidity: sensorData.humidity,
+                        waterTemp: sensorData.water_temp,
+                        ec: sensorData.electrical_conductivity,
+                        ph: sensorData.pH
+                    },
+                    recommendations: recommendations
                 };
                 
-                setPlantData(mockData);
+                setPlantData(formattedData);
                 setLoading(false);
             } catch (error) {
                 console.error("Error fetching plant data:", error);
@@ -40,10 +43,10 @@ const PlantPage = () => {
 
         fetchPlantData();
         
-        // Poll every 30 seconds for updates
-        const interval = setInterval(fetchPlantData, 30000);
+        // Poll every 5 seconds for updates
+        const interval = setInterval(fetchPlantData, 5000);
         return () => clearInterval(interval);
-    }, []);
+    }, [id]);
 
     if (loading) {
         return (
@@ -60,10 +63,20 @@ const PlantPage = () => {
     return (
         <div style={{ 
             padding: '2rem',
-            paddingTop: '10vh',
             minHeight: '100vh',
             backgroundColor: '#f5f9f7'
         }}>
+            {/* Back button */}
+            <Link to="/" style={{
+                display: 'inline-block',
+                marginBottom: '1rem',
+                color: '#537E72',
+                textDecoration: 'none',
+                fontSize: '1rem'
+            }}>
+                ← Back to Dashboard
+            </Link>
+
             {/* Plant Header */}
             <div style={{
                 textAlign: 'center',
@@ -115,13 +128,6 @@ const PlantPage = () => {
                 />
                 
                 <Card 
-                    title="Light Intensity"
-                    value={plantData?.sensors.lightIntensity.value}
-                    unit={plantData?.sensors.lightIntensity.unit}
-                    status={plantData?.sensors.lightIntensity.status}
-                />
-                
-                <Card 
                     title="Electrical Conductivity"
                     value={plantData?.sensors.ec.value}
                     unit={plantData?.sensors.ec.unit}
@@ -143,17 +149,37 @@ const PlantPage = () => {
                 padding: '0 1rem'
             }}>
                 <h2 style={{ color: '#2f5b4a', marginBottom: '1rem' }}>
-                    System Status
+                    Recommendations
                 </h2>
-                <div style={{
-                    background: '#d4edda',
-                    border: '1px solid #c3e6cb',
-                    borderRadius: '0.5rem',
-                    padding: '1rem',
-                    color: '#155724'
-                }}>
-                    ✓ All systems operating within optimal range
-                </div>
+                {plantData?.recommendations && plantData.recommendations.length > 0 ? (
+                    <div style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '0.5rem'
+                    }}>
+                        {plantData.recommendations.map((rec, index) => (
+                            <div key={index} style={{
+                                background: rec.includes('perfect') || rec.includes('good') ? '#d4edda' : '#fff3cd',
+                                border: rec.includes('perfect') || rec.includes('good') ? '1px solid #c3e6cb' : '1px solid #ffeaa7',
+                                borderRadius: '0.5rem',
+                                padding: '1rem',
+                                color: rec.includes('perfect') || rec.includes('good') ? '#155724' : '#856404'
+                            }}>
+                                {rec.includes('perfect') || rec.includes('good') ? '✓' : '⚠️'} {rec}
+                            </div>
+                        ))}
+                    </div>
+                ) : (
+                    <div style={{
+                        background: '#d4edda',
+                        border: '1px solid #c3e6cb',
+                        borderRadius: '0.5rem',
+                        padding: '1rem',
+                        color: '#155724'
+                    }}>
+                        ✓ All systems operating within optimal range
+                    </div>
+                )}
             </div>
         </div>
     );
