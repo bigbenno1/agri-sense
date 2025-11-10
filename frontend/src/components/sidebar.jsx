@@ -1,19 +1,18 @@
-// Import React and the hook we need
-import React, { useEffect } from 'react'; // bring in React + useEffect for lifecycle work
-import { Link } from 'react-router-dom';  // import Link so clicks navigate without reloading
+import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 
-export default function Sidebar() { // export a component the app can render
-  const HEADER_H = '8vh';           // fixed header height so the sidebar sits underneath
-  const OPEN_W   = 250;             // expanded sidebar width in px
-  const CLOSED_W = 55;              // collapsed sidebar width in px
+export default function Sidebar() {
+  const HEADER_H = '8vh';
+  const OPEN_W   = 250;
+  const CLOSED_W = 55;
 
-  useEffect(() => {                                                      // run once on mount
-    let styleEl = document.querySelector('style[data-sidebar-css="true"]'); // try to find our injected <style>
-    if (!styleEl) {                                                      // if it doesn't exist yet
-      styleEl = document.createElement('style');                         // create a <style> element
-      styleEl.setAttribute('data-sidebar-css', 'true');                  // tag it so we can find it later
-      document.head.appendChild(styleEl);                                // add it to <head>
-    }                                                                    // end if no style tag
+  useEffect(() => {
+    let styleEl = document.querySelector('style[data-sidebar-css="true"]');
+    if (!styleEl) {
+      styleEl = document.createElement('style');
+      styleEl.setAttribute('data-sidebar-css', 'true');
+      document.head.appendChild(styleEl);
+    }
     styleEl.textContent = `                                            
 :root{
   --base-clr: hsla(114 22% 83%);
@@ -58,34 +57,34 @@ html.agri-sidebar-closed #sidebar{
 #sidebar svg.icon-stroke{ fill:none; stroke:var(--text-clr); stroke-width:2px; stroke-linecap:round; stroke-linejoin:round; }
 html.agri-sidebar-closed #sidebar a span{ display: none; }
 html.agri-sidebar-closed #sidebar a{ justify-content:center; }
-`;                                                                   // end CSS text
+`;
 
-    const savedClosed = (() => {                                      // get persisted collapsed state
+    const savedClosed = (() => {
       try { return localStorage.getItem('sidebar:closed') === 'true'; }
       catch { return false; }
     })();
-    document.documentElement.classList.toggle('agri-sidebar-closed', savedClosed); // apply class to <html>
+    document.documentElement.classList.toggle('agri-sidebar-closed', savedClosed);
 
-    const prevTr = document.body.style.transition;                    // save body transition
-    document.body.style.transition = 'padding-left 200ms ease';       // smooth padding shift
+    const prevTr = document.body.style.transition;
+    document.body.style.transition = 'padding-left 200ms ease';
 
-    const el = document.getElementById('sidebar');                     // find sidebar element
-    const applyPadding = () => {                                       // function to sync body padding
-      const w = el ? el.getBoundingClientRect().width : (savedClosed ? CLOSED_W : OPEN_W); // compute width
-      document.body.style.paddingLeft = `${w}px`;                      // set padding-left
+    const el = document.getElementById('sidebar');
+    const applyPadding = () => {
+      const w = el ? el.getBoundingClientRect().width : (savedClosed ? CLOSED_W : OPEN_W);
+      document.body.style.paddingLeft = `${w}px`;
     };
-    applyPadding();                                                    // run now
+    applyPadding();
 
-    const ro = ('ResizeObserver' in window && el) ? new ResizeObserver(applyPadding) : null; // observe size
-    ro?.observe(el);                                                   // start observing
+    const ro = ('ResizeObserver' in window && el) ? new ResizeObserver(applyPadding) : null;
+    ro?.observe(el);
 
-    return () => {                                                     // cleanup on unmount
-      ro?.disconnect();                                                // stop observing
-      document.body.style.transition = prevTr;                         // restore transition
+    return () => {
+      ro?.disconnect();
+      document.body.style.transition = prevTr;
     };
-  }, []);                                                              // run once
+  }, []);
 
-  const navStyle = {                                                   // minimal inline positioning
+  const navStyle = {
     position: 'fixed',
     top: 0, left: 0,
     height: '100vh',
@@ -96,20 +95,20 @@ html.agri-sidebar-closed #sidebar a{ justify-content:center; }
     overflow: 'hidden',
   };
 
-  return (                                                             // render the sidebar
-    <nav id="sidebar" role="navigation" aria-label="Sidebar" style={navStyle}> {/* semantic nav */}
-      <ul>                                                             {/* vertical list */}
-        <li className="active">                                        {/* Home item */}
-          <Link to="/">                                                {/* go to dashboard route */}
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"> {/* home icon */}
+  return (
+    <nav id="sidebar" role="navigation" aria-label="Sidebar" style={navStyle}>
+      <ul>
+        <li className="active">
+          <Link to="/">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
               <path d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z"/>
             </svg>
-            <span>Home</span>                                          {/* label (hidden when collapsed) */}
+            <span>Home</span>
           </Link>
         </li>
 
-        <li>                                                           {/* Plant 1 */}
-          <Link to="/plant/1">                                         {/* go to plant 1 */}
+        <li>
+          <Link to="/plant/1">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
               <path d="M342-160h276l40-160H302l40 160Zm0 80q-28 0-49-17t-28-44l-45-179h520l-45 179q-7 27-28 44t-49 17H342ZM200-400h560v-80H200v80Zm280-240q0-100 70-170t170-70q0 90-57 156t-143 80v84h320v160q0 33-23.5 56.5T760-320H200q-33 0-56.5-23.5T120-400v-160h320v-84q-86-14-143-80t-57-156q100 0 170 70t70 170Z"/>
             </svg>
@@ -117,8 +116,8 @@ html.agri-sidebar-closed #sidebar a{ justify-content:center; }
           </Link>
         </li>
 
-        <li>                                                           {/* Plant 2 */}
-          <Link to="/plant/2">                                         {/* go to plant 2 */}
+        <li>
+          <Link to="/plant/2">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
               <path d="M342-160h276l40-160H302l40 160Zm0 80q-28 0-49-17t-28-44l-45-179h520l-45 179q-7 27-28 44t-49 17H342ZM200-400h560v-80H200v80Zm280-240q0-100 70-170t170-70q0 90-57 156t-143 80v84h320v160q0 33-23.5 56.5T760-320H200q-33 0-56.5-23.5T120-400v-160h320v-84q-86-14-143-80t-57-156q100 0 170 70t70 170Z"/>
             </svg>
@@ -126,8 +125,8 @@ html.agri-sidebar-closed #sidebar a{ justify-content:center; }
           </Link>
         </li>
 
-        <li>                                                           {/* Plant 3 */}
-          <Link to="/plant/3">                                         {/* go to plant 3 */}
+        <li>
+          <Link to="/plant/3">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960">
               <path d="M342-160h276l40-160H302l40 160Zm0 80q-28 0-49-17t-28-44l-45-179h520l-45 179q-7 27-28 44t-49 17H342ZM200-400h560v-80H200v80Zm280-240q0-100 70-170t170-70q0 90-57 156t-143 80v84h320v160q0 33-23.5 56.5T760-320H200q-33 0-56.5-23.5T120-400v-160h320v-84q-86-14-143-80t-57-156q100 0 170 70t70 170Z"/>
             </svg>
@@ -135,9 +134,9 @@ html.agri-sidebar-closed #sidebar a{ justify-content:center; }
           </Link>
         </li>
 
-        <li>                                                           {/* Settings */}
-          <Link to="/settings">                                        {/* go to settings route */}
-            <svg className="icon-stroke" viewBox="0 0 24 24" aria-hidden="true"> {/* stroke sliders */}
+        <li>
+          <Link to="/settings">
+            <svg className="icon-stroke" viewBox="0 0 24 24" aria-hidden="true">
               <line x1="21" y1="4"  x2="14" y2="4"  />
               <line x1="10" y1="4"  x2="3"  y2="4"  />
               <circle cx="12" cy="4"  r="2"  />
@@ -153,5 +152,5 @@ html.agri-sidebar-closed #sidebar a{ justify-content:center; }
         </li>
       </ul>
     </nav>
-  ); // end render
-} // end component
+  );
+}

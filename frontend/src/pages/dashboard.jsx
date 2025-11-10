@@ -1,21 +1,24 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Card from '../components/card';
-import Button from '../components/button';
+import { PlantCard } from '../components/card';
 
 const DashboardPage = () => {
     const plants = [
-                { id: 1, name: "Basil Plant 1"}, 
-                { id: 2, name: "Basil Plant 2"},
-                { id: 3, name: "Basil Plant 3"}
-            ];
+        { id: 1, name: "Basil Plant 1"}, 
+        { id: 2, name: "Basil Plant 2"},
+        { id: 3, name: "Basil Plant 3"}
+    ];
+
     return (
         <main className="dashboard-page"
             style={{ 
-            padding: '2rem',
-            minHeight: '100vh',
-            backgroundColor: '#f5f9f7'
-        }}>
+                paddingTop: 'calc(8vh + 2rem)', // Account for fixed header
+                paddingLeft: '2rem',
+                paddingRight: '2rem',
+                paddingBottom: '2rem',
+                minHeight: '100vh',
+                backgroundColor: '#f5f9f7'
+            }}>
             {/* Dashboard header */}
             <div style={{
                 textAlign: 'center',
@@ -35,18 +38,22 @@ const DashboardPage = () => {
                 </p>
             </div>
             
-            <div className="cards" 
+            <div className="plant-grid" 
                 style={{
-                display: 'grid',
-                gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
-                gap: '1.5rem',
-                maxWidth: '1200px',
-                margin: '0 auto',
-                padding: '0 1rem'
-            }}>
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                    gap: '2rem',
+                    maxWidth: '1200px',
+                    margin: '0 auto',
+                    padding: '0 1rem'
+                }}>
                 {plants.map((plant) => (
-                    <Link key={plant.id} to={`/plant/${plant.id}`}>
-                        <Button>{plant.name}</Button>
+                    <Link 
+                        key={plant.id} 
+                        to={`/plant/${plant.id}`}
+                        style={{ textDecoration: 'none' }}
+                    >
+                        <PlantCard plant={plant} />
                     </Link>
                 ))}
             </div>
