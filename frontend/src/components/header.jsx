@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import "./header.css"
 import Sidebar from './sidebar';
 
@@ -38,17 +39,16 @@ export default function Header() {
                 </a> */}
 
             {/* Title */}
-            <a className="title"
-                href="">
+            <Link className="title" to="/" style={{ textDecoration: 'none' }}>
                 <h1>🌱Agri-Sense🌱</h1>
             </a>
 
             {/* Profile Icon */}
-            <a href="">
-                <i class="material-icons profile-button">
+            <button style={{ background: 'none', border: 'none', cursor: 'pointer' }}>
+                <i className="material-icons profile-button">
                     account_circle
                 </i>
-            </a>
+            </button>
         </header>
     </>
   )

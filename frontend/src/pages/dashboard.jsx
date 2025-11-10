@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-//import Card from '../components/card';
+import Card from '../components/card';
 import Button from '../components/button';
 
 const DashboardPage = () => {
@@ -13,16 +13,14 @@ const DashboardPage = () => {
         <main className="dashboard-page"
             style={{ 
             padding: '2rem',
-            paddingTop: '10vh',
             minHeight: '100vh',
             backgroundColor: '#f5f9f7'
-        }} >
+        }}>
             {/* Dashboard header */}
             <div style={{
                 textAlign: 'center',
                 marginBottom: '2rem'
             }}>
-                
                 <h1 style={{ 
                     color: '#2f5b4a',
                     margin: '0.5rem 0'
@@ -33,9 +31,10 @@ const DashboardPage = () => {
                     color: '#6b8a78',
                     fontSize: '0.9rem'
                 }}>
-                    click for more info
+                    Click on a plant for more info
                 </p>
             </div>
+            
             <div className="cards" 
                 style={{
                 display: 'grid',
@@ -52,7 +51,6 @@ const DashboardPage = () => {
                 ))}
             </div>
         </main>
-
     );
 };
 
