@@ -4,6 +4,10 @@ import DashboardPage from './pages/dashboard';
 import PlantPage from './pages/plant-details';
 import SettingsPage from './pages/settings';
 import Header from './components/header';
+import useFetch from './hooks/useFetch';
+
+// You will need to install Tailwind CSS for styling in the next steps, 
+// but for now, we'll use inline styles to keep it minimal.
 
 function App() {
   return (
