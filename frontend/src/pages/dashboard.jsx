@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { PlantCard } from '../components/card';
 
 const DashboardPage = () => {
     const plants = [
@@ -52,78 +53,7 @@ const DashboardPage = () => {
                         to={`/plant/${plant.id}`}
                         style={{ textDecoration: 'none' }}
                     >
-                        <div style={{
-                            background: 'linear-gradient(135deg, #eaf3ee 0%, #d4e8d8 100%)',
-                            borderRadius: '1rem',
-                            padding: '2rem',
-                            boxShadow: '0 4px 12px rgba(47, 91, 74, 0.15)',
-                            transition: 'all 0.3s ease',
-                            cursor: 'pointer',
-                            border: '2px solid transparent',
-                            minHeight: '200px',
-                            display: 'flex',
-                            flexDirection: 'column',
-                            alignItems: 'center',
-                            justifyContent: 'center',
-                            textAlign: 'center'
-                        }}
-                        onMouseOver={(e) => {
-                            e.currentTarget.style.transform = 'translateY(-8px)';
-                            e.currentTarget.style.boxShadow = '0 8px 24px rgba(47, 91, 74, 0.25)';
-                            e.currentTarget.style.borderColor = '#537E72';
-                        }}
-                        onMouseOut={(e) => {
-                            e.currentTarget.style.transform = 'translateY(0)';
-                            e.currentTarget.style.boxShadow = '0 4px 12px rgba(47, 91, 74, 0.15)';
-                            e.currentTarget.style.borderColor = 'transparent';
-                        }}
-                        >
-                            {/* Plant Icon */}
-                            <div style={{
-                                fontSize: '4rem',
-                                marginBottom: '1rem'
-                            }}>
-                                🌿
-                            </div>
-                            
-                            {/* Plant Name */}
-                            <h2 style={{
-                                color: '#2f5b4a',
-                                fontSize: '1.5rem',
-                                margin: '0 0 0.5rem 0',
-                                fontWeight: '600'
-                            }}>
-                                {plant.name}
-                            </h2>
-                            
-                            {/* Status indicator */}
-                            <div style={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '0.5rem',
-                                color: '#537E72',
-                                fontSize: '0.9rem'
-                            }}>
-                                <span style={{
-                                    width: '8px',
-                                    height: '8px',
-                                    borderRadius: '50%',
-                                    backgroundColor: '#4ade80',
-                                    display: 'inline-block'
-                                }}></span>
-                                Active
-                            </div>
-                            
-                            {/* View details hint */}
-                            <p style={{
-                                marginTop: '1rem',
-                                color: '#6b8a78',
-                                fontSize: '0.85rem',
-                                fontStyle: 'italic'
-                            }}>
-                                Click to view details →
-                            </p>
-                        </div>
+                        <PlantCard plant={plant} />
                     </Link>
                 ))}
             </div>

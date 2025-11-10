@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { DataCard } from '../components/card';
 
 const PlantPage = () => {
     const { id } = useParams();
@@ -42,107 +43,10 @@ const PlantPage = () => {
         return () => clearInterval(interval);
     }, [id]);
 
-    const DataCard = ({ title, value, unit, status, min, max }) => {
-        const getStatusColor = (status) => {
-            switch(status) {
-                case 'optimal': return { bg: '#d4edda', border: '#c3e6cb', text: '#155724' };
-                case 'warning': return { bg: '#fff3cd', border: '#ffeaa7', text: '#856404' };
-                case 'critical': return { bg: '#f8d7da', border: '#f5c6cb', text: '#721c24' };
-                default: return { bg: '#e2e8f0', border: '#cbd5e0', text: '#4a5568' };
-            }
-        };
-
-        const colors = getStatusColor(status);
-
-        return (
-            <div style={{
-                background: colors.bg,
-                border: `2px solid ${colors.border}`,
-                borderRadius: '1rem',
-                padding: '1.5rem',
-                boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-                transition: 'transform 0.2s ease',
-            }}
-            onMouseOver={(e) => e.currentTarget.style.transform = 'translateY(-4px)'}
-            onMouseOut={(e) => e.currentTarget.style.transform = 'translateY(0)'}
-            >
-                <h3 style={{ 
-                    margin: '0 0 1rem 0',
-                    color: colors.text,
-                    fontSize: '1rem',
-                    fontWeight: '600'
-                }}>
-                    {title}
-                </h3>
-                
-                {/* Main value display */}
-                <div style={{
-                    display: 'flex',
-                    alignItems: 'baseline',
-                    justifyContent: 'center',
-                    padding: '1.5rem 0',
-                    gap: '0.25rem'
-                }}>
-                    <span style={{
-                        fontSize: '3rem',
-                        fontWeight: 'bold',
-                        color: colors.text,
-                        lineHeight: 1
-                    }}>
-                        {value !== null && value !== undefined ? value : '--'}
-                    </span>
-                    <span style={{
-                        fontSize: '1.2rem',
-                        color: colors.text,
-                        opacity: 0.8
-                    }}>
-                        {unit}
-                    </span>
-                </div>
-
-                {/* Range indicator */}
-                {min !== null && max !== null && (
-                    <div style={{
-                        marginTop: '1rem',
-                        padding: '0.5rem',
-                        background: 'rgba(255,255,255,0.5)',
-                        borderRadius: '0.5rem',
-                        fontSize: '0.85rem',
-                        color: colors.text
-                    }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-                            <span>Min: {min}{unit}</span>
-                            <span>Max: {max}{unit}</span>
-                        </div>
-                    </div>
-                )}
-
-                {/* Status badge */}
-                <div style={{
-                    marginTop: '1rem',
-                    textAlign: 'center'
-                }}>
-                    <span style={{
-                        display: 'inline-block',
-                        padding: '0.25rem 0.75rem',
-                        borderRadius: '1rem',
-                        fontSize: '0.75rem',
-                        fontWeight: '600',
-                        textTransform: 'uppercase',
-                        background: colors.text,
-                        color: 'white'
-                    }}>
-                        {status || 'unknown'}
-                    </span>
-                </div>
-            </div>
-        );
-    };
-
     if (loading) {
         return (
             <div style={{ 
-                paddingTop: 'calc(8vh + 2rem)', // Account for fixed header
+                paddingTop: 'calc(8vh + 2rem)',
                 paddingLeft: '2rem',
                 paddingRight: '2rem',
                 paddingBottom: '2rem',
