@@ -18,6 +18,8 @@ OneWire oneWire(ONE_WIRE_BUS);
 // Pass our oneWire reference to Dallas Temperature sensor 
 DallasTemperature sensors(&oneWire);
 
+BH1750 lightMeter;
+
 void setup(void)
 {
   // Start serial communication for debugging purposes
