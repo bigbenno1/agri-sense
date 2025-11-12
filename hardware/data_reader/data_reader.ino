@@ -33,5 +33,7 @@ void temperature(void) {
   float farenheitTemp = sensors.getTempFByIndex(0);
 
   // Print the temperature in farenheit to the Serial Monitor
-  Serial.println(farenheitTemp);
+  Serial.print("Farenheit Temperature: ");
+  Serial.print(farenheitTemp, 2);
+  Serial.println("}");
 }
