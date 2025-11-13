@@ -1,21 +1,22 @@
-#include <OneWire.h>
-#include <DallasTemperature.h>
 #include <Wire.h>
 #include <BH1750.h>
 #include "DHT.h"
+#include <OneWire.h>
+#include <DallasTemperature.h>
+
+// Data wire is connected to the Arduino digital pin 4
+#define ONE_WIRE_BUS 4
+
+// Setup a OneWire instance to communicate with any OneWire devices
+OneWire oneWire(ONE_WIRE_BUS);
+
+// Pass our OneWire reference to Dallas Temperature sensor 
+DallasTemperature sensors(&oneWire);
+
 #define DHTPIN 2     // Digital pin connected to the DHT sensor (set to 2 for now)
 
 #define DHTTYPE DHT11   // DHT 11
 DHT dht(DHTPIN, DHTTYPE);
-
-// Data wire is conntec to the Arduino digital pin 4
-#define ONE_WIRE_BUS 4
-
-// Setup a oneWire instance to communicate with any OneWire devices
-OneWire oneWire(ONE_WIRE_BUS);
-
-// Pass our oneWire reference to Dallas Temperature sensor 
-DallasTemperature sensors(&oneWire);
 
 BH1750 lightMeter;
 
@@ -23,29 +24,19 @@ void setup(void)
 {
   // Start serial communication for debugging purposes
   Serial.begin(9600);
-  // Start up the library
-  sensors.begin();
   Wire.begin();
   lightMeter.begin(BH1750::CONTINUOUS_HIGH_RES_MODE);
   dht.begin();
+  sensors.begin();
 }
 
-void loop(void){ 
+void loop(void)
+{ 
   // Call different reading functions below here
-  temperature();
   lightData();
+  temperature();
 
   delay(250);
-}
-
-// Example function to read temperature
-void temperature(void) {
-  // Request temperature readings from the sensor and convert to farenheit
-  sensors.requestTemperatures(); 
-  float farenheitTemp = sensors.getTempFByIndex(0);
-
-  // Print the temperature in farenheit to the Serial Monitor
-  Serial.println(farenheitTemp);
 }
 
 // Function to read and print light data
@@ -110,4 +101,26 @@ void humidity(void)
   Serial.print(hif);
   Serial.print(F(" °F"));
   */
+}
+
+// Example function to read temperature
+void temperature(void)
+{
+  // Request temperature readings from the sensor 
+  sensors.requestTemperatures(); 
+
+  float fahrenheitTemp = sensors.getTempFByIndex(0);
+  float celsiusTemp   = sensors.getTempCByIndex(0);
+
+  // Print the temperature readings
+  Serial.println("Water Temperature | Pin: 4 | Units: Fahrenheit AND Celsius");
+
+  Serial.print("Data: ");
+  Serial.print(fahrenheitTemp, 2);
+  Serial.print(" °F / ");
+  Serial.print(celsiusTemp, 2);
+  Serial.println(" °C");
+
+  // Separate data with em dash
+  Serial.println("—");
 }

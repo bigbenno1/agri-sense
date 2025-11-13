@@ -6,7 +6,10 @@ Data-driven web app for monitoring and optimizing plant (vertical/indoor farm) h
 
 Clone the repo, Navigate to the directory: `cd frontend`.  
 Install dependencies (if needed): `npm install`.  
-Start the server, Run: `npm start` to launch the React development server (using your package.json)
+Install web vitals: `npm install web-vitals`.
+Install Install React Router: `npm install react-router-dom`.
+Install Tailwind CSS: npm install `-D tailwindcss postcss autoprefixer` & `npx tailwindcss init -p`.
+Start the server (backend), Run: `npm start` to launch the React development server (using your package.json)
 
 ## Backend:
 
