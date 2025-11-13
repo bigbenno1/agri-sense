@@ -15,20 +15,32 @@ class SensorData:
     def set_name(self, name):#update name
         self.name = name
     
+
+    def fahrenheit_to_celsius(self, value):
+        return (value - 32) * 5 / 9
     
     #setter methods for all variables and bounds
+
+    #vales will be default fahrenheit
     def set_air_temp(self, value, max_val, min_val):
         self.air_temp = {
-            "value": value,
-            "min": min_val,
-            "max": max_val
+            "fahrenheit_value": value,
+            "fahrenheit_min": min_val,
+            "fahrenheit_max": max_val,
+            "celsius_value": self.farenheit_to_celcius(value),
+            "celsius_min": self.farenheit_to_celcius(min_val),
+            "celsius_max": self.farenheit_to_celcius(max_val)
         }
 
+    #vales will be default fahrenheit
     def set_water_temp(self, value, max_val, min_val):
         self.water_temp = {
-            "value": value,
-            "min": min_val,
-            "max": max_val
+            "fahrenheit_value": value,
+            "fahrenheit_min": min_val,
+            "fahrenheit_max": max_val,
+            "celsius_value": self.farenheit_to_celcius(value),
+            "celsius_min": self.farenheit_to_celcius(min_val),
+            "celsius_max": self.farenheit_to_celcius(max_val)
         }
 
     def set_humidity(self, value, max_val, min_val):
