@@ -4,6 +4,7 @@ import DashboardPage from './pages/dashboard';
 import PlantPage from './pages/plant-details';
 import SettingsPage from './pages/settings';
 import Header from './components/header';
+import Footer from './components/footer';
 import useFetch from './hooks/useFetch';
 
 // You will need to install Tailwind CSS for styling in the next steps, 
@@ -26,7 +27,10 @@ function App() {
           <Route path="/plant/:id" element={<PlantPage />} />
           <Route path="/settings" element={<SettingsPage />} />
         </Routes>
+
+        <Footer/>
       </div>
+      
     </Router>
   );
 }
