@@ -1,6 +1,6 @@
 # Optional for if we decide to use SQLAlchemy 
 # (might be helpful if nobody has major SQL experience)
-# ALL VALUES ARE TEMPORARY AND CAN BE CHANGED BASED ON PLANT
+
 class SensorData:
     def __init__(self, name=None):
         self.name = name
@@ -12,7 +12,9 @@ class SensorData:
 
     def set_name(self, name):#update name
         self.name = name
-
+    
+    
+    #setter methods for all variables and bounds
     def set_air_temp(self, value, max_val, min_val):
         self.air_temp = {
             "value": value,
@@ -48,9 +50,8 @@ class SensorData:
             "max": max_val
         }
 
-    # --- Return full dictionary structure ---
+    
     def create_dict(self):
-        """Return the sensor data in full dictionary format."""
         return {
             "name": self.name,
             "air_temp": self.air_temp,
