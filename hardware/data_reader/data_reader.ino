@@ -34,7 +34,9 @@ void loop(void)
 { 
   // Call different reading functions below here
   lightData();
-  temperature();
+  //ph();
+  humidity();
+  water_temperature();
 
   delay(250);
 }
@@ -104,7 +106,7 @@ void humidity(void)
 }
 
 // Example function to read temperature
-void temperature(void)
+void water_temperature(void)
 {
   // Request temperature readings from the sensor 
   sensors.requestTemperatures(); 
