@@ -3,6 +3,11 @@
 #include "DHT.h"
 #include <OneWire.h>
 #include <DallasTemperature.h>
+#include "DFRobot_PH.h"
+#include <EEPROM.h>
+
+// pH pin definition
+#define PH_PIN A0
 
 // Data wire is connected to the Arduino digital pin 4
 #define ONE_WIRE_BUS 4
@@ -14,6 +19,9 @@ OneWire oneWire(ONE_WIRE_BUS);
 DallasTemperature sensors(&oneWire);
 
 #define DHTPIN 2     // Digital pin connected to the DHT sensor (set to 2 for now)
+
+DFRobot_PH ph;
+
 
 #define DHTTYPE DHT11   // DHT 11
 DHT dht(DHTPIN, DHTTYPE);
@@ -28,13 +36,14 @@ void setup(void)
   lightMeter.begin(BH1750::CONTINUOUS_HIGH_RES_MODE);
   dht.begin();
   sensors.begin();
+  ph.begin();
 }
 
 void loop(void)
 { 
   // Call different reading functions below here
   lightData();
-  //ph();
+  pH();
   humidity();
   water_temperature();
 
@@ -55,6 +64,15 @@ float luxToPPFD(float lux)
 {
   float kConversionFactor = 0.0185;
   return lux * kConversionFactor;
+}
+
+void pH() {
+  int sensorValue = analogRead(PH_PIN);
+  float voltage = sensorValue * 5.0 / 1024.0;   // Convert analog value to voltage
+  float phValue = ph.readPH(voltage, 25);     // Calculate pH with temperature compensation
+
+  Serial.print("pH: ");
+  Serial.println(phValue, 2);
 }
 
 void humidity(void)
