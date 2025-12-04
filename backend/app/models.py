@@ -25,9 +25,9 @@ class SensorData:
             "fahrenheit_value": value,
             "fahrenheit_min": min_val,
             "fahrenheit_max": max_val,
-            "celsius_value": self.farenheit_to_celcius(value),
-            "celsius_min": self.farenheit_to_celcius(min_val),
-            "celsius_max": self.farenheit_to_celcius(max_val)
+            "celsius_value": self.fahrenheit_to_celsius(value),
+            "celsius_min": self.fahrenheit_to_celsius(min_val),
+            "celsius_max": self.fahrenheit_to_celsius(max_val)
         }
 
     #vales will be default fahrenheit
@@ -36,9 +36,9 @@ class SensorData:
             "fahrenheit_value": value,
             "fahrenheit_min": min_val,
             "fahrenheit_max": max_val,
-            "celsius_value": self.farenheit_to_celcius(value),
-            "celsius_min": self.farenheit_to_celcius(min_val),
-            "celsius_max": self.farenheit_to_celcius(max_val)
+            "celsius_value": self.fahrenheit_to_celsius(value),
+            "celsius_min": self.fahrenheit_to_celsius(min_val),
+            "celsius_max": self.fahrenheit_to_celsius(max_val)
         }
 
     def set_humidity(self, value, max_val, min_val):
