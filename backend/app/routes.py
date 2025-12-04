@@ -25,10 +25,10 @@ def get_recommendation():
     data = response.get_json()
     print(data)
     recommendations = give_temp_recommendation(
-        data["air_temp"]["value"],
-        data["air_temp"]["unit"],
-        data["water_temp"]["value"],
-        data["water_temp"]["unit"],
+        data["air_temp"]["fahrenheit_value"],
+        "F",
+        data["water_temp"]["fahrenheit_value"],
+        "F",
         data["humidity"]["value"],
         data["electrical_conductivity"]["value"],
         data["pH"]["value"]
